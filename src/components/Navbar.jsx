@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin } from "react-icons/fa"
+import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa"
 import logo from "../assets/logo.jpg"
 
 const Navbar = () => {
@@ -16,9 +16,10 @@ const Navbar = () => {
             <a href="https://github.com/lllit" target="_blank" rel="noopener noreferrer" aria-label="Github">
                 <FaGithub></FaGithub>
             </a>
-            <a href="https://www.linkedin.com/in/matiaspereznauto/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <FaLinkedin></FaLinkedin>
+            <a href="https://www.instagram.com/lllit_3/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <FaInstagram></FaInstagram>
             </a>
+            
         </div>
     </nav>
   )
