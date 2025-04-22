@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Contact = () => {
   return (
-    <div className="border-t border-stone-900 pb-20">
+    <div className="border-t border-stone-900 pb-20 text-stone-200">
       <motion.h2
         className="my-10 text-center text-4xl"
         whileInView={{ opacity: 1, y: 0 }}

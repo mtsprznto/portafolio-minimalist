@@ -6,6 +6,7 @@ import Projects from "./components/Projects";
 import Technologies from "./components/Technologies";
 
 const App = () => {
+
   return (
     <div className="overflow-x-hidden text-stone-300 antialiased">
       <div className="fixed inset-0 -z-10">
@@ -23,7 +24,6 @@ const App = () => {
         <Experience></Experience>
         <Contact></Contact>
       </div>
-
     </div>
   );
 };

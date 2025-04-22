@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Experience = () => {
   return (
-    <div className="pb-4">
+    <div className="pb-4 text-stone-200">
       <motion.h2
         whileInView={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: -100 }}
@@ -14,7 +14,7 @@ const Experience = () => {
       </motion.h2>
       <div>
         {EXPERIENCES.map((experience, index) => (
-          <div key={index} className="mb-8 flex flex-wrap lg:justify-center">
+          <div key={index} className="mb-8 flex flex-wrap lg:justify-center text-stone-200">
             <motion.div
               whileInView={{ opacity: 1, x: 0 }}
               initial={{ opacity: 0, x: -100 }}

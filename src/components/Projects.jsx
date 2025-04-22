@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Projects = () => {
   return (
-    <div className="pb-4">
+    <div className="pb-4 text-stone-200">
       <motion.h2
         className="my-20 text-center text-4xl"
         whileInView={{ opacity: 1, y: 0 }}
