@@ -69,7 +69,7 @@ const Hero = () => {
               target="_blank"
               rel="noopener noreferrer"
               download
-              className="bg-white rounded-full p-4 text-sm text-stone-800"
+              className="bg-white rounded-full p-4 text-sm text-stone-800 btn_cv"
             >
               Descargar CV
             </motion.a>
