@@ -9,3 +9,6 @@
 .btn_cv{
   color: #000000;
 }
+element.style{
+  transform: translateY(0) !important;
+}
