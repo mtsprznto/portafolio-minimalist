@@ -1,3 +1,4 @@
+import { FaGithub } from "react-icons/fa";
 import { PROJECTS } from "../constants";
 import { motion } from "framer-motion";
 
@@ -14,7 +15,10 @@ const Projects = () => {
       </motion.h2>
       <div>
         {PROJECTS.map((project, index) => (
-          <div key={index} className="mb-8 flex flex-wrap lg:justify-center justify-center ">
+          <div
+            key={index}
+            className="mb-8 flex flex-wrap lg:justify-center justify-center "
+          >
             <motion.div
               whileInView={{ opacity: 1, y: 0 }}
               initial={{ opacity: 0, y: -100 }}
@@ -26,7 +30,7 @@ const Projects = () => {
                 alt={project.title}
                 width={250}
                 height={250}
-                className="mb-6 rounded mx-auto"
+                className="mb-6 rounded mx-auto object-contain"
               />
             </motion.div>
             <motion.div
@@ -37,6 +41,25 @@ const Projects = () => {
             >
               <h3 className="mb-2 font-semibold text-2xl">{project.title}</h3>
               <p className="mb-4 text-stone-400">{project.description}</p>
+              <div className="mb-5 flex items-center gap-4">
+                <a
+                  href={project.url_demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white rounded-full py-2 px-4 text-sm text-stone-800 font-bold"
+                >
+                  DEMO
+                </a>
+                
+                <a
+                  href={project.url_codigo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Github"
+                >
+                  <FaGithub></FaGithub>
+                </a>
+              </div>
               {project.technologies.map((tech, index) => (
                 <span
                   className="mr-2 rounded bg-stone-900 p-2 text-sm font-medium text-stone-300 "
