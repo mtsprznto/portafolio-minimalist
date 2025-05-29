@@ -1,5 +1,5 @@
-import project1 from "../assets/projects/project-1.webp";
 import demo1_gestpass from "../assets/projects/demo1_gestpass.png";
+import demo2_particles from "../assets/projects/demo2_particle.png";
 
 
 export const HERO_CONTENT = `Desarrollador de software con experiencia en tecnologías como Python, SQL, Next.js, React y PHP. Apasionado por la creación de soluciones eficientes y seguras, con especial enfoque en el desarrollo full stack y la optimización de interfaces. Con un sólido historial de proyectos personales y académicos, destaco por mi capacidad de análisis, resolución de problemas y compromiso con las mejores prácticas en desarrollo. Busco oportunidades para aplicar mis conocimientos en entornos dinámicos, colaborativos e innovadores.`;
@@ -17,7 +17,7 @@ export const PROJECTS = [
   },
   {
     title: "Particles Portafolio",
-    image: "https://private-user-images.githubusercontent.com/106929604/438039972-83981263-7355-4cc7-a28b-9cc365a7ef3b.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDg0ODg0MTEsIm5iZiI6MTc0ODQ4ODExMSwicGF0aCI6Ii8xMDY5Mjk2MDQvNDM4MDM5OTcyLTgzOTgxMjYzLTczNTUtNGNjNy1hMjhiLTljYzM2NWE3ZWYzYi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwNTI5JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDUyOVQwMzA4MzFaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04ZGZmYmY3YTcwMzdkYTUwNmZiNzJiNzU1Yzk5ODkyZDBlOGRjY2E3MGVjNTI1MzlhOGRmOGQ2MTFkNmFjZGZmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.jepMuW5TebOjVhlELIS8O0SsHZpP8cuJX9ONxqDNZgU",
+    image: demo2_particles,
     description: "Esta aplicación demo combina el poder de Next.js, React y Spline para ofrecer una experiencia visual y dinámica que redefine la forma en que interactuamos con interfaces gráficas en la web",
     technologies: ["Next.js", "React", "Spline"],
     url_demo: "https://lllitparticles.netlify.app/",
