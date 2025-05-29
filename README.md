@@ -1,12 +1,11 @@
-# React + Vite
+## Desarrollo de Plataforma Web con React y TailwindCSS
+Diseñé y desarrollé una aplicación web moderna utilizando React para una estructura modular y eficiente, complementada con TailwindCSS para una interfaz rápida y optimizada.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+### ✅ Componentización y escalabilidad: Implementación de una arquitectura basada en componentes reutilizables, asegurando un código limpio y mantenible.
+### ✅ Diseño responsivo: Adaptabilidad total con TailwindCSS, garantizando una experiencia fluida en dispositivos móviles y de escritorio.
+### ✅ Optimización de rendimiento: Uso de técnicas como lazy loading y renderización eficiente para mejorar la velocidad de carga.
+### ✅ Integración de datos: Conexión con API REST y gestión avanzada del estado con herramientas como React Query o Redux, optimizando la sincronización de datos.
+### ✅ Experiencia UI/UX refinada: Enfoque en interactividad y usabilidad, priorizando accesibilidad y rendimiento sin comprometer el diseño.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Este proyecto me permitió perfeccionar habilidades en React y TailwindCSS, garantizando soluciones escalables y eficientes en entornos de producción.
