@@ -29,8 +29,8 @@ const Hero = () => {
               src={profilePic}
               alt="Matias Perez Nauto"
               className="border border-stone-950 rounded-3xl"
-              width={650}
-              height={650}
+              width={250}
+              height={250}
               initial={{ x: 100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.3 }}

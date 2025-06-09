@@ -37,12 +37,14 @@ const Technologies = () => {
         className="flex flex-wrap items-center justify-center gap-4"
       >
         <motion.div
+          className="p-4"
           initial="initial"
           animate="animate"
-          variants={iconVariants(2.5)}
+          variants={iconVariants(4)}
         >
-          <RiReactjsLine className="text-7xl text-cyan-400"></RiReactjsLine>
+          <DiPython className="text-7xl text-green-500"></DiPython>
         </motion.div>
+
         <motion.div
           className="p-4"
           initial="initial"
@@ -74,14 +76,6 @@ const Technologies = () => {
           variants={iconVariants(6)}
         >
           <BiLogoPostgresql className="text-7xl text-sky-700"></BiLogoPostgresql>
-        </motion.div>
-        <motion.div
-          className="p-4"
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(4)}
-        >
-          <DiPython className="text-7xl text-green-500"></DiPython>
         </motion.div>
       </motion.div>
     </div>
