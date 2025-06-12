@@ -1,9 +1,9 @@
 import demo1_gestpass from "../assets/projects/demo1_gestpass.png";
-import demo2_particles from "../assets/projects/demo2_particle.png";
+import demo4_arriendopv from "../assets/projects/demo4_arriendopv.png";
 import demo3_academ from "../assets/projects/demo3_academ.png";
 
 
-export const HERO_CONTENT = `Desarrollador de software con experiencia en tecnologías como Python, SQL, Next.js y PHP. Apasionado por la creación de soluciones eficientes y seguras, con especial enfoque en el desarrollo full stack y la optimización de interfaces. Con un sólido historial de proyectos personales y académicos, destaco por mi capacidad de análisis, resolución de problemas y compromiso con las mejores prácticas en desarrollo. Busco oportunidades para aplicar mis conocimientos en entornos dinámicos, colaborativos e innovadores.`;
+export const HERO_CONTENT = `Desarrollador de software con experiencia en Python, JavaScript, Next.js, PHP , SQL. Apasionado por crear soluciones eficientes, seguras y optimizadas, con enfoque en interfaces y mejores prácticas. Busco aportar en entornos dinámicos e innovadores.`;
 
 export const ABOUT_TEXT = `Soy un desarrollador full stack dedicado y versátil con pasión por crear aplicaciones web eficientes y fáciles de usar. Con 5 años de experiencia profesional, he trabajado con una variedad de tecnologías, incluyendo React, Next.js, Node.js, MySQL, PostgreSQL y MongoDB. Mi camino en el desarrollo web comenzó con una profunda curiosidad por entender cómo funcionan las cosas y ha evolucionado en una carrera en la que busco aprender y adaptarme continuamente a nuevos desafíos. Disfruto trabajar en entornos colaborativos y resolver problemas complejos para ofrecer soluciones de alta calidad. Fuera del mundo del código, me gusta mantenerme activo, explorar nuevas tecnologías y contribuir a proyectos de código abierto.`;
 
@@ -25,12 +25,12 @@ export const PROJECTS = [
     url_codigo: "https://github.com/mtsprznto/gestpass",
   },
   {
-    title: "Particles Portafolio",
-    image: demo2_particles,
-    description: "Esta aplicación demo combina el poder de Next.js, React y Spline para ofrecer una experiencia visual y dinámica que redefine la forma en que interactuamos con interfaces gráficas en la web",
-    technologies: ["Next.js", "React", "Spline"],
-    url_demo: "https://lllitparticles.netlify.app/",
-    url_codigo: "https://github.com/mtsprznto/particles-portafolio",
+    title: "CabañasPv",
+    image: demo4_arriendopv,
+    description: "Este proyecto es una aplicación web desarrollada con Next.js (versión 13.5.6), React (versión 18), y Tailwind CSS para el diseño de estilos. Está orientado a la promoción y arriendo de propiedades, en la región de Puerto Varas, Chile",
+    technologies: ["Next.js", "Tailwind CSS", "Framer Motion","Leaflet"],
+    url_demo: "https://cabanaspv.vercel.app/",
+    url_codigo: "https://github.com/mtsprznto/cabanaspv",
   },
 ];
 

@@ -9,6 +9,10 @@
 .btn_cv{
   color: #000000;
 }
+.btn_cv:hover{
+  color: #fff;
+  
+}
 element.style{
   transform: translateY(0) !important;
 }

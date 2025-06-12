@@ -1,4 +1,5 @@
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa"
+
 import logo from "../assets/logo.jpg"
 
 const Navbar = () => {

@@ -1,6 +1,7 @@
 import profilePic from "../assets/profilePic.jpeg";
 import { HERO_CONTENT } from "../constants";
 import { motion } from "framer-motion";
+import { IoMdCloudDownload } from "react-icons/io";
 
 const containerVariants = {
   hidden: { opacity: 0, x: -100 },
@@ -69,9 +70,13 @@ const Hero = () => {
               target="_blank"
               rel="noopener noreferrer"
               download
-              className="bg-white rounded-full p-4 text-sm text-stone-800 btn_cv"
+              className="bg-white rounded-full p-4 text-sm text-stone-800 btn_cv hover:bg-white/40 hover:text-white"
             >
-              Descargar CV
+              <div className="flex items-center gap-2">
+                <IoMdCloudDownload className="h-5 w-5"></IoMdCloudDownload>
+                Descargar CV
+              </div>
+              
             </motion.a>
           </motion.div>
         </div>
