@@ -80,14 +80,12 @@ src/
 2. **Sistema Académico** - Plataforma de gestión educativa
 3. **Sistema de Arriendo** - Solución para administración de propiedades
 
-[Agrega más detalles sobre cada proyecto con enlaces si están desplegados]
 
 ## 📞 Contacto
 
-- 📧 Email: [tu-email@ejemplo.com]
-- 💼 LinkedIn: [enlace-a-tu-perfil]
-- 🌐 Sitio Web: [tu-sitio-web.com]
-- 🐦 Twitter: [@tuusuario]
+- 📧 Email: [matiaspereznauto@gmail.com]
+- 💼 LinkedIn: [https://www.linkedin.com/in/matiaspereznauto/]
+- 🌐 Sitio Web: [https://portafolio.mtsprz.org/]
 
 ## 📄 Licencia
 
