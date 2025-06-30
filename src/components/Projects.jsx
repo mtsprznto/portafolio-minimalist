@@ -26,7 +26,7 @@ const Projects = () => {
               className="w-full lg:w-1/4 flex justify-center"
             >
               <img
-                src={project.image}
+                src={project.image || "src/assets/default-cv.svg"}
                 alt={project.title}
                 width={250}
                 height={250}
@@ -40,22 +40,28 @@ const Projects = () => {
               className="w-full max-w-xl lg:w-3/4"
             >
               <h3 className="mb-2 font-semibold text-2xl">{project.title}</h3>
+              <p className="mb-2 text-sm text-stone-400">
+                Fecha: {project.date}
+              </p>
               <p className="mb-4 text-stone-400">{project.description}</p>
               <div className="mb-5 flex items-center gap-4">
-                <a
-                  href={project.url_demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white rounded-full py-2 px-4 text-sm text-stone-800 font-bold"
-                >
-                  DEMO
-                </a>
-                
+                {project.url_demo && (
+                  <a
+                    href={project.url_demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-full py-2 px-4 text-sm text-stone-800 font-bold hover:bg-white/40 hover:text-white duration-240"
+                  >
+                    DEMO
+                  </a>
+                )}
+
                 <a
                   href={project.url_codigo}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Github"
+                  className="border rounded-full py-2 px-4 text-sm font-bold hover:bg-white/40 hover:text-white duration-240"
                 >
                   <FaGithub></FaGithub>
                 </a>
