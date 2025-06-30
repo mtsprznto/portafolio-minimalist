@@ -26,6 +26,7 @@ const Contact = () => {
           initial={{ opacity: 0, x: -100 }}
           transition={{ duration: 0.5 }}
           className="my-4"
+          href={`tel:${CONTACT.phoneNo}`}
         >
           {CONTACT.phoneNo}
         </motion.p>
@@ -33,7 +34,7 @@ const Contact = () => {
           whileInView={{ opacity: 1, x: 0 }}
           initial={{ opacity: 0, x: -100 }}
           transition={{ duration: 0.5 }}
-          href="#"
+          href={`mailto:${CONTACT.email}`}
           className="border-b"
         >
           {CONTACT.email}
