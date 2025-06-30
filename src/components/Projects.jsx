@@ -26,7 +26,7 @@ const Projects = () => {
               className="w-full lg:w-1/4 flex justify-center"
             >
               <img
-                src={project.image || "src/assets/default-cv.svg"}
+                src={project.image || "/default-cv.svg"}
                 alt={project.title}
                 width={250}
                 height={250}
