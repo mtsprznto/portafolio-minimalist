@@ -1,8 +1,34 @@
 import { FaGithub } from "react-icons/fa";
-import { PROJECTS } from "../constants";
 import { motion } from "framer-motion";
+import { useProjects } from "../hooks/useProjects";
+import { useState, useEffect } from "react";
+import { getScreenshotURL } from "../utils/getScreenshot";
 
 const Projects = () => {
+  const { projects, loading } = useProjects();
+  const [visibleCount, setVisibleCount] = useState(6); // muestra los primeros 6
+  const [imageLoading, setImageLoading] = useState({});
+
+  useEffect(() => {
+    const initialState = projects.reduce(
+      (acc, _, i) => ({ ...acc, [i]: true }),
+      {}
+    );
+    setImageLoading(initialState);
+  }, [projects]);
+
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-[60vh]">
+        <motion.div
+          className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"
+          initial={{ rotate: 0 }}
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, duration: 1 }}
+        />
+      </div>
+    );
+
   return (
     <div className="pb-4 text-stone-200">
       <motion.h2
@@ -13,8 +39,9 @@ const Projects = () => {
       >
         Proyectos
       </motion.h2>
+
       <div>
-        {PROJECTS.map((project, index) => (
+        {projects.slice(0, visibleCount).map((project, index) => (
           <div
             key={index}
             className="mb-8 flex flex-wrap lg:justify-center justify-center "
@@ -23,31 +50,56 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               initial={{ opacity: 0, y: -100 }}
               transition={{ duration: 1 }}
-              className="w-full lg:w-1/4 flex justify-center"
+              className="w-full lg:w-1/4 flex justify-center relative"
             >
-              <img
-                src={project.image || "/default-cv.svg"}
-                alt={project.title}
-                width={250}
-                height={250}
-                className="mb-6 rounded mx-auto object-contain"
-              />
+              {imageLoading[index] ? (
+                <div
+                  className="flex justify-center items-center w-60 h-60 bg-cover bg-white/2 backdrop-blur-md"
+                  style={{ backgroundImage: "url('/default-cv.svg')" }}
+                >
+                  <motion.div
+                    className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: 360 }}
+                    transition={{ repeat: Infinity, duration: 1 }}
+                  />
+                </div>
+              ) : (
+                <img
+                  src={
+                    project.sitio_web
+                      ? getScreenshotURL(project.sitio_web)
+                      : "/default-cv.svg"
+                  }
+                  alt={`Preview de ${project.titulo}`}
+                  width={250}
+                  height={250}
+                  onLoad={() =>
+                    setImageLoading((prev) => ({ ...prev, [index]: false }))
+                  }
+                  onError={() =>
+                    setImageLoading((prev) => ({ ...prev, [index]: false }))
+                  }
+                  className="mb-6 rounded mx-auto object-cover shadow-md w-60 h-60"
+                />
+              )}
             </motion.div>
+
             <motion.div
               whileInView={{ opacity: 1, x: 0 }}
               initial={{ opacity: 0, x: 100 }}
               transition={{ duration: 1 }}
               className="w-full max-w-xl lg:w-3/4"
             >
-              <h3 className="mb-2 font-semibold text-2xl">{project.title}</h3>
+              <h3 className="mb-2 font-semibold text-2xl">{project.titulo}</h3>
               <p className="mb-2 text-sm text-stone-400">
-                Fecha: {project.date}
+                Fecha: {project.fecha}
               </p>
-              <p className="mb-4 text-stone-400">{project.description}</p>
+              <p className="mb-4 text-stone-400">{project.descripcion}</p>
               <div className="mb-5 flex items-center gap-4">
-                {project.url_demo && (
+                {project.sitio_web && (
                   <a
-                    href={project.url_demo}
+                    href={project.sitio_web}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-white rounded-full py-2 px-4 text-sm text-stone-800 font-bold hover:bg-white/40 hover:text-white duration-240"
@@ -57,7 +109,7 @@ const Projects = () => {
                 )}
 
                 <a
-                  href={project.url_codigo}
+                  href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Github"
@@ -66,17 +118,38 @@ const Projects = () => {
                   <FaGithub></FaGithub>
                 </a>
               </div>
-              {project.technologies.map((tech, index) => (
-                <span
-                  className="mr-2 rounded bg-stone-900 p-2 text-sm font-medium text-stone-300 "
-                  key={index}
-                >
-                  {tech}
-                </span>
-              ))}
+              {(() => {
+                const total = Object.values(project.lenguajes_completos).reduce(
+                  (acc, val) => acc + val,
+                  0
+                );
+                return Object.entries(project.lenguajes_completos).map(
+                  ([lenguaje, bytes], index) => {
+                    const porcentaje = ((bytes / total) * 100).toFixed(1);
+                    return (
+                      <span
+                        className="mr-2 rounded bg-stone-900 p-2 text-sm font-medium text-stone-300"
+                        key={index}
+                      >
+                        {lenguaje}: {porcentaje}%
+                      </span>
+                    );
+                  }
+                );
+              })()}
             </motion.div>
           </div>
         ))}
+        {visibleCount < projects.length && (
+          <div className="text-center mt-10">
+            <button
+              onClick={() => setVisibleCount((prev) => prev + 6)}
+              className="bg-white text-stone-900 font-bold px-6 py-2 rounded-full hover:bg-white/40 hover:text-white transition duration-300"
+            >
+              Ver más proyectos
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
