@@ -2,7 +2,6 @@ import { FaGithub } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useProjects } from "../hooks/useProjects";
 import { useState, useEffect } from "react";
-import { getScreenshotURL } from "../utils/getScreenshot";
 
 const Projects = () => {
   const { projects, loading } = useProjects();
@@ -52,30 +51,35 @@ const Projects = () => {
               transition={{ duration: 1 }}
               className="w-full lg:w-1/4 flex justify-center relative"
             >
-              {imageLoading[index] ? (
-                <div
-                  className="flex justify-center items-center w-60 h-60 bg-cover bg-white/2 backdrop-blur-md"
-                  style={{ backgroundImage: "url('/default-cv.svg')" }}
-                >
+              <img
+                src={
+                  project.sitio_web
+                    ? `https://apiproyectosmtsprz.vercel.app/static/previews/${project.repositorio}.png`
+                    : "/default-cv.svg"
+                }
+                alt={`Preview de ${project.titulo}`}
+                width={250}
+                height={250}
+                onLoad={() =>
+                  setImageLoading((prev) => ({ ...prev, [index]: false }))
+                }
+                onError={() =>
+                  setImageLoading((prev) => ({ ...prev, [index]: false }))
+                }
+                className={`mb-6 rounded mx-auto object-cover shadow-md w-60 h-60 transition-opacity duration-500 ${
+                  imageLoading[index] ? "opacity-0" : "opacity-100"
+                }`}
+              />
+
+              {imageLoading[index] && (
+                <div className="absolute top-0 left-0 w-60 h-60 flex justify-center items-center">
+                  <motion.div
+                    className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: 360 }}
+                    transition={{ repeat: Infinity, duration: 1 }}
+                  />
                 </div>
-              ) : (
-                <img
-                  src={
-                    project.sitio_web
-                      ? getScreenshotURL(project.sitio_web)
-                      : "/default-cv.svg"
-                  }
-                  alt={`Preview de ${project.titulo}`}
-                  width={250}
-                  height={250}
-                  onLoad={() =>
-                    setImageLoading((prev) => ({ ...prev, [index]: false }))
-                  }
-                  onError={() =>
-                    setImageLoading((prev) => ({ ...prev, [index]: false }))
-                  }
-                  className="mb-6 rounded mx-auto object-cover shadow-md w-60 h-60"
-                />
               )}
             </motion.div>
 
