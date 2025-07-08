@@ -57,12 +57,6 @@ const Projects = () => {
                   className="flex justify-center items-center w-60 h-60 bg-cover bg-white/2 backdrop-blur-md"
                   style={{ backgroundImage: "url('/default-cv.svg')" }}
                 >
-                  <motion.div
-                    className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"
-                    initial={{ rotate: 0 }}
-                    animate={{ rotate: 360 }}
-                    transition={{ repeat: Infinity, duration: 1 }}
-                  />
                 </div>
               ) : (
                 <img
