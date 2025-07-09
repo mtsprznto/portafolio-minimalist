@@ -39,17 +39,17 @@ const Projects = () => {
         Proyectos
       </motion.h2>
 
-      <div>
+      <div className="">
         {projects.slice(0, visibleCount).map((project, index) => (
           <div
             key={index}
-            className="mb-8 flex flex-wrap lg:justify-center justify-center "
+            className="mb-8 flex flex-wrap lg:justify-center justify-center md:border-none border-l border-stone-600 py-3 px-4 rounded-lg shadow-md"
           >
             <motion.div
               whileInView={{ opacity: 1, y: 0 }}
               initial={{ opacity: 0, y: -100 }}
               transition={{ duration: 1 }}
-              className="w-full lg:w-1/4 flex justify-center relative"
+              className="w-full lg:w-1/4 flex justify-center relative "
             >
               <img
                 src={
@@ -116,25 +116,26 @@ const Projects = () => {
                   <FaGithub></FaGithub>
                 </a>
               </div>
-              {(() => {
-                const total = Object.values(project.lenguajes_completos).reduce(
-                  (acc, val) => acc + val,
-                  0
-                );
-                return Object.entries(project.lenguajes_completos).map(
-                  ([lenguaje, bytes], index) => {
-                    const porcentaje = ((bytes / total) * 100).toFixed(1);
-                    return (
-                      <span
-                        className="mr-2 rounded bg-stone-900 p-2 text-sm font-medium text-stone-300"
-                        key={index}
-                      >
-                        {lenguaje}: {porcentaje}%
-                      </span>
-                    );
-                  }
-                );
-              })()}
+              <div className="flex flex-wrap">
+                {(() => {
+                  const total = Object.values(
+                    project.lenguajes_completos
+                  ).reduce((acc, val) => acc + val, 0);
+                  return Object.entries(project.lenguajes_completos).map(
+                    ([lenguaje, bytes], index) => {
+                      const porcentaje = ((bytes / total) * 100).toFixed(1);
+                      return (
+                        <span
+                          className="mr-2 rounded bg-stone-900 p-2 text-[10px] md:text-sm font-medium text-stone-300"
+                          key={index}
+                        >
+                          {lenguaje}: {porcentaje}%
+                        </span>
+                      );
+                    }
+                  );
+                })()}
+              </div>
             </motion.div>
           </div>
         ))}
