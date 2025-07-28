@@ -54,7 +54,7 @@ const Projects = () => {
               <img
                 src={
                   project.sitio_web
-                    ? `https://apiproyectosmtsprz.vercel.app/static/previews/${project.repositorio}.png`
+                    ? `https://raw.githubusercontent.com/mtsprznto/auto_actualizar_cv/refs/heads/main/api/static/previews/${project.repositorio}.png`
                     : "/default-cv.svg"
                 }
                 alt={`Preview de ${project.titulo}`}
