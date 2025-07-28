@@ -18,7 +18,7 @@ export function useProjects() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("https://apiproyectosmtsprz.vercel.app/proyectos")
+        fetch("https://raw.githubusercontent.com/mtsprznto/auto_actualizar_cv/refs/heads/main/data/proyectos_combinados_all.json")
             .then(res => res.json())
             .then(data => {
                 setProjects(data);
