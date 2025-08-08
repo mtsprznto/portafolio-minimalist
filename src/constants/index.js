@@ -125,6 +125,5 @@ export const EXPERIENCES = [
 
 export const CONTACT = {
   address: "Puerto Varas",
-  phoneNo: "+56975475781",
-  email: "matiaspereznauto@gmail.com",
+  email: "contacto@mtsprz.org",
 };
