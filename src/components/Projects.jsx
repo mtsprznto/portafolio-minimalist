@@ -39,7 +39,7 @@ const Projects = () => {
         Proyectos
       </motion.h2>
 
-      <div className="">
+      <div className="grid md:grid-cols-2 grid-cols-1">
         {projects.slice(0, visibleCount).map((project, index) => (
           <div
             key={index}
@@ -49,7 +49,7 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               initial={{ opacity: 0, y: -100 }}
               transition={{ duration: 1 }}
-              className="w-full lg:w-1/4 flex justify-center relative "
+              className="w-full md:w-full flex justify-center relative "
             >
               <img
                 src={
@@ -139,7 +139,9 @@ const Projects = () => {
             </motion.div>
           </div>
         ))}
-        {visibleCount < projects.length && (
+        
+      </div>
+      {visibleCount < projects.length && (
           <div className="text-center mt-10">
             <button
               onClick={() => setVisibleCount((prev) => prev + 6)}
@@ -149,7 +151,6 @@ const Projects = () => {
             </button>
           </div>
         )}
-      </div>
     </div>
   );
 };

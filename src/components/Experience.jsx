@@ -12,7 +12,7 @@ const Experience = () => {
       >
         Experiencia
       </motion.h2>
-      <div>
+      <div className="grid md:grid-cols-2 grid-cols-1">
         {EXPERIENCES.map((experience, index) => (
           <div key={index} className="mb-8 flex flex-wrap lg:justify-center text-stone-200">
             <motion.div
