@@ -118,7 +118,7 @@ export const EXPERIENCES = [
     year: "2026 - Junio 2026",
     role: "Fullstack AI Engineer / Developer",
     company: "Jurispeed",
-    description: `Lidero el diseño e implementación del ciclo de vida de datos para un ecosistema de IA legal. Desarrollé un motor ETL masivo en Python para la ingesta e indexación de más de 600k sentencias judiciales bajo una arquitectura RAG. Responsable del desarrollo evolutivo de un chatbot especializado (Vue 3 / FastAPI), optimizando la recuperación semántica y la interfaz de usuario. Implementé sistemas de scraping distribuido y resiliente con Scrapy y Playwright para la extracción automatizada de datos públicos.`,
+    description: `Implementación del ciclo de vida de datos para un ecosistema de IA legal. Desarrollé un motor ETL masivo en Python para la ingesta e indexación de más de 600k sentencias judiciales bajo una arquitectura RAG. Responsable del desarrollo evolutivo de un chatbot especializado (Vue 3 / FastAPI), optimizando la recuperación semántica y la interfaz de usuario. Implementé sistemas de scraping distribuido y resiliente con Scrapy y Playwright para la extracción automatizada de datos públicos.`,
     technologies: ["Python", "FastAPI", "Vue 3", "TypeScript", "DynamoDB", "Redis", "RAG", "Docker", "Playwright", "Clerk"],
   },
 ];
