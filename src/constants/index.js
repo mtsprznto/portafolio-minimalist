@@ -3,7 +3,10 @@ import demo4_arriendopv from "../assets/projects/demo4_arriendopv.png";
 import demo3_academ from "../assets/projects/demo3_academ.png";
 import demo5_coffedream from "../assets/projects/demo5_coffe.png";
 import demo6_bankco_beta from "../assets/projects/demo6_bankco_beta.png";
-export const HERO_CONTENT = `Desarrollador de software con experiencia en Python, JavaScript, Next.js, PHP , SQL. Apasionado por crear soluciones eficientes, seguras y optimizadas, con enfoque en interfaces y mejores prácticas. Busco aportar en entornos dinámicos e innovadores.`;
+
+
+export const HERO_CONTENT = `Fullstack & AI Engineer especializado en el diseño de arquitecturas escalables, sistemas distribuidos de baja latencia y automatizaciones avanzadas. Con experiencia liderando el desarrollo de plataformas SaaS, optimización de motores ETL masivos con IA e interfaces interactivas de alto rendimiento. Mi enfoque combina la rigurosidad del código limpio con soluciones en la nube robustas, seguras y orientadas a resolver desafíos críticos de negocio.`;
+
 
 export const ABOUT_TEXT = `Soy un desarrollador full stack dedicado y versátil con pasión por crear aplicaciones web eficientes y fáciles de usar. Con 5 años de experiencia profesional, he trabajado con una variedad de tecnologías, incluyendo React, Next.js, Node.js, MySQL, PostgreSQL y MongoDB. Mi camino en el desarrollo web comenzó con una profunda curiosidad por entender cómo funcionan las cosas y ha evolucionado en una carrera en la que busco aprender y adaptarme continuamente a nuevos desafíos. Disfruto trabajar en entornos colaborativos y resolver problemas complejos para ofrecer soluciones de alta calidad. Fuera del mundo del código, me gusta mantenerme activo, explorar nuevas tecnologías y contribuir a proyectos de código abierto.`;
 
@@ -105,19 +108,18 @@ export const PROJECTS = [
 
 export const EXPERIENCES = [
   {
-    year: "2025 - Presente",
-    role: "Desarrollador FullStack",
-    company: "Gestpass S.A",
-    description: `Desarrollé una aplicación de gestión de contraseñas siguiendo las mejores prácticas de seguridad y desarrollo, implementando el patrón MVC para una estructura modular y eficiente. La aplicación permite almacenar, gestionar y encriptar contraseñas de manera segura, además de generar claves robustas con caracteres especiales.
-    Para su desarrollo, utilicé Next.js y React, junto con diversas bibliotecas especializadas en seguridad y criptografía, asegurando un sistema confiable y escalable. Este proyecto refleja mi experiencia en desarrollo web y optimización de código, priorizando seguridad y usabilidad.`,
-    technologies: ["TypeScript", "JavaScript", "CSS", "React.js"],
+    year: "2026 - Presente",
+    role: "Lead Fullstack Developer",
+    company: "Blast-Up",
+    description: `Liderazgo técnico en una plataforma SaaS para ingeniería de minas, desarrollando un simulador de vibraciones geomecánicas en tiempo real. Diseñé visualizaciones 3D complejas utilizando React Three Fiber y mapeo geoespacial interactivo con Leaflet. Coordiné la arquitectura completa del sistema integrando seguridad avanzada con Next-Auth, persistencia robusta con Prisma/PostgreSQL y la automatización de procesamiento de infraestructura multimedia optimizada en nubes AWS.`,
+    technologies: ["Next.js", "React 19", "TypeScript", "Three.js", "Prisma", "PostgreSQL", "AWS S3", "Vitest", "Tailwind CSS"],
   },
   {
-    year: "2025 - Presente",
-    role: "Desarrollador FullStack",
-    company: "Academ S.A",
-    description: `La plataforma está diseñada con una arquitectura modular, basada en Node.js, utilizando Next.js para el frontend y un backend optimizado con Prisma y PostgreSQL. Se ha integrado Stripe para la gestión de pagos y Clerk para la autenticación de usuarios.`,
-    technologies: ["Next.js", "React", "TailwindCSS", "ShadCN UI", "Node.js", "Prisma ORM", "PostgreSQL (Neon)", "Clerk", "Stripe", "Neon.tech"],
+    year: "2026 - Junio 2026",
+    role: "Fullstack AI Engineer / Developer",
+    company: "Jurispeed",
+    description: `Lidero el diseño e implementación del ciclo de vida de datos para un ecosistema de IA legal. Desarrollé un motor ETL masivo en Python para la ingesta e indexación de más de 600k sentencias judiciales bajo una arquitectura RAG. Responsable del desarrollo evolutivo de un chatbot especializado (Vue 3 / FastAPI), optimizando la recuperación semántica y la interfaz de usuario. Implementé sistemas de scraping distribuido y resiliente con Scrapy y Playwright para la extracción automatizada de datos públicos.`,
+    technologies: ["Python", "FastAPI", "Vue 3", "TypeScript", "DynamoDB", "Redis", "RAG", "Docker", "Playwright", "Clerk"],
   },
 ];
 
