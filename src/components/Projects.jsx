@@ -1,157 +1,160 @@
-import { FaGithub } from "react-icons/fa";
-import { motion } from "framer-motion";
-import { useProjects } from "../hooks/useProjects";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { FaGithub } from "react-icons/fa";
+import { FiExternalLink } from "react-icons/fi";
+import { useProjects } from "../hooks/useProjects";
 
 const Projects = () => {
   const { projects, loading } = useProjects();
-  const [visibleCount, setVisibleCount] = useState(6); // muestra los primeros 6
   const [imageLoading, setImageLoading] = useState({});
 
   useEffect(() => {
-    const initialState = projects.reduce(
-      (acc, _, i) => ({ ...acc, [i]: true }),
-      {}
-    );
-    setImageLoading(initialState);
+    if (projects.length) {
+      const initialState = projects.reduce(
+        (acc, _, i) => ({ ...acc, [i]: true }),
+        {}
+      );
+      setImageLoading(initialState);
+    }
   }, [projects]);
 
-  if (loading)
+  if (loading) {
     return (
-      <div className="flex justify-center items-center h-[60vh]">
-        <motion.div
-          className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"
-          initial={{ rotate: 0 }}
-          animate={{ rotate: 360 }}
-          transition={{ repeat: Infinity, duration: 1 }}
-        />
-      </div>
+      <section id="proyectos" className="flex min-h-[50vh] items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-white/20 border-t-white" />
+      </section>
     );
+  }
 
   return (
-    <div className="pb-4 text-stone-200">
-      <motion.h2
-        className="my-20 text-center text-4xl"
+    <section id="proyectos" className="relative py-28 lg:py-36">
+      {/* Section Header — full-width, left-padded */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        initial={{ opacity: 0, y: -100 }}
-        transition={{ duration: 0.5 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+        className="mb-12 px-8 lg:mb-16 lg:px-16"
       >
-        Proyectos
-      </motion.h2>
+        <span className="mb-3 block text-[11px] font-medium tracking-[0.15em] text-white/30 uppercase">
+          Trabajos
+        </span>
+        <h2 className="text-[clamp(1.8rem,4vw,3.5rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white">
+          Proyectos
+        </h2>
+        <div className="mt-4 h-px w-16 bg-white/10" />
+      </motion.div>
 
-      <div className="grid md:grid-cols-2 grid-cols-1">
-        {projects.slice(0, visibleCount).map((project, index) => (
+      {/* Cinematic grid — asymmetric alternating widths */}
+      <div className="px-0">
+        {projects.reduce((rows, project, i) => {
+          // Group into pairs
+          if (i % 2 === 0) rows.push([]);
+          rows[rows.length - 1].push({ project, index: i });
+          return rows;
+        }, []).map((row, rowIdx) => (
           <div
-            key={index}
-            className="mb-8 flex flex-wrap lg:justify-center justify-center md:border-none border-l border-stone-600 py-3 px-4 rounded-lg shadow-md"
+            key={rowIdx}
+            className={`flex flex-col lg:flex-row ${
+              rowIdx % 2 === 0 ? "" : "lg:flex-row-reverse"
+            }`}
           >
-            <motion.div
-              whileInView={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: -100 }}
-              transition={{ duration: 1 }}
-              className="w-full md:w-full flex justify-center relative "
-            >
-              <img
-                src={
-                  project.sitio_web
-                    ? `https://raw.githubusercontent.com/mtsprznto/auto_actualizar_cv/refs/heads/main/api/static/previews/${project.repositorio}.png`
-                    : "/default-cv.svg"
-                }
-                alt={`Preview de ${project.titulo}`}
-                width={250}
-                height={250}
-                onLoad={() =>
-                  setImageLoading((prev) => ({ ...prev, [index]: false }))
-                }
-                onError={() =>
-                  setImageLoading((prev) => ({ ...prev, [index]: false }))
-                }
-                className={`mb-6 rounded mx-auto object-cover shadow-md w-60 h-60 transition-opacity duration-500 ${
-                  imageLoading[index] ? "opacity-0" : "opacity-100"
-                }`}
-              />
-
-              {imageLoading[index] && (
-                <div className="absolute top-0 left-0 w-60 h-60 flex justify-center items-center">
-                  <motion.div
-                    className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"
-                    initial={{ rotate: 0 }}
-                    animate={{ rotate: 360 }}
-                    transition={{ repeat: Infinity, duration: 1 }}
-                  />
-                </div>
-              )}
-            </motion.div>
-
-            <motion.div
-              whileInView={{ opacity: 1, x: 0 }}
-              initial={{ opacity: 0, x: 100 }}
-              transition={{ duration: 1 }}
-              className="w-full max-w-xl lg:w-3/4"
-            >
-              <h3 className="mb-2 font-semibold text-2xl">{project.titulo}</h3>
-              <p className="mb-2 text-sm text-stone-400">
-                Fecha: {project.fecha}
-              </p>
-              <p className="mb-4 text-stone-400">{project.descripcion}</p>
-              <div className="mb-5 flex items-center gap-4">
-                {project.sitio_web && (
-                  <a
-                    href={project.sitio_web}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white rounded-full py-2 px-4 text-sm text-stone-800 font-bold hover:bg-white/40 hover:text-white duration-240"
-                  >
-                    DEMO
-                  </a>
-                )}
-
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Github"
-                  className="border rounded-full py-2 px-4 text-sm font-bold hover:bg-white/40 hover:text-white duration-240"
+            {row.map(({ project, index }) => {
+              const isWide = (rowIdx % 2 === 0 && index % 2 === 0) ||
+                             (rowIdx % 2 !== 0 && index % 2 !== 0);
+              return (
+                <motion.article
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.8, delay: (index % 2) * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                  className={`col-immersive min-h-[50vh] lg:min-h-[70vh] ${
+                    isWide ? "lg:flex-[2]" : "lg:flex-[1]"
+                  }`}
+                  style={{ flex: isWide ? "2 1 0%" : "1 1 0%" }}
                 >
-                  <FaGithub></FaGithub>
-                </a>
-              </div>
-              <div className="flex flex-wrap">
-                {(() => {
-                  const total = Object.values(
-                    project.lenguajes_completos
-                  ).reduce((acc, val) => acc + val, 0);
-                  return Object.entries(project.lenguajes_completos).map(
-                    ([lenguaje, bytes], index) => {
-                      const porcentaje = ((bytes / total) * 100).toFixed(1);
-                      return (
-                        <span
-                          className="mr-2 rounded bg-stone-900 p-2 text-[10px] md:text-sm font-medium text-stone-300"
-                          key={index}
-                        >
-                          {lenguaje}: {porcentaje}%
-                        </span>
-                      );
+                  {/* Background image */}
+                  <img
+                    src={
+                      project.sitio_web
+                        ? `https://raw.githubusercontent.com/mtsprznto/auto_actualizar_cv/refs/heads/main/api/static/previews/${project.repositorio}.png`
+                        : "/default-cv.svg"
                     }
-                  );
-                })()}
-              </div>
-            </motion.div>
+                    alt={`Preview de ${project.titulo}`}
+                    loading="lazy"
+                    onLoad={() =>
+                      setImageLoading((prev) => ({ ...prev, [index]: false }))
+                    }
+                    onError={(e) => {
+                      setImageLoading((prev) => ({ ...prev, [index]: false }));
+                      e.target.src = "/default-cv.svg";
+                    }}
+                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+                      imageLoading[index] ? "opacity-0" : "opacity-100"
+                    }`}
+                  />
+
+                  {/* Loading placeholder */}
+                  {imageLoading[index] && (
+                    <div className="absolute inset-0 bg-[#121212]" />
+                  )}
+
+                  {/* Cinematic gradient overlay */}
+                  <div
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 40%, rgba(10,10,10,0.1) 100%)",
+                    }}
+                  />
+
+                  {/* Content overlay — bottom-left */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
+                    <span className="mb-2 block text-[10px] font-medium tracking-[0.15em] text-white/40 uppercase">
+                      {project.fecha}
+                    </span>
+
+                    <h3 className="text-xl font-bold uppercase tracking-[0.05em] text-white lg:text-2xl">
+                      {project.titulo}
+                    </h3>
+
+                    <p className="mt-2 max-w-sm text-[13px] leading-relaxed text-white/45 line-clamp-2">
+                      {project.descripcion}
+                    </p>
+
+                    <div className="mt-4 flex flex-wrap items-center gap-3">
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Código fuente"
+                        className="inline-flex items-center gap-2 bg-[#1A1A1A] border border-white/[0.06] px-5 py-2 text-[11px] font-medium tracking-[0.12em] text-white/70 uppercase transition-all duration-300 hover:border-white/20 hover:text-white active:scale-[0.98]"
+                      >
+                        <FaGithub size={12} />
+                        VER PROYECTO
+                      </a>
+
+                      {project.sitio_web && (
+                        <a
+                          href={project.sitio_web}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 border border-white/[0.04] px-5 py-2 text-[11px] font-medium tracking-[0.12em] text-white/40 uppercase transition-all duration-300 hover:border-white/15 hover:text-white/70 active:scale-[0.98]"
+                        >
+                          <FiExternalLink size={12} />
+                          DEMO
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
           </div>
         ))}
-        
       </div>
-      {visibleCount < projects.length && (
-          <div className="text-center mt-10">
-            <button
-              onClick={() => setVisibleCount((prev) => prev + 6)}
-              className="bg-white text-stone-900 font-bold px-6 py-2 rounded-full hover:bg-white/40 hover:text-white transition duration-300"
-            >
-              Ver más proyectos
-            </button>
-          </div>
-        )}
-    </div>
+    </section>
   );
 };
 

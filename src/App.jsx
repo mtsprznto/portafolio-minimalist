@@ -1,29 +1,50 @@
-import Contact from "./components/Contact";
-import Experience from "./components/Experience";
-import Hero from "./components/Hero";
+import { lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
-import Projects from "./components/Projects";
-import Technologies from "./components/Technologies";
+import Hero from "./components/Hero";
+
+const Experience = lazy(() => import("./components/Experience"));
+const Projects = lazy(() => import("./components/Projects"));
+const Technologies = lazy(() => import("./components/Technologies"));
+const Contact = lazy(() => import("./components/Contact"));
+
+const SectionFallback = () => (
+  <div className="flex h-screen items-center justify-center">
+    <div className="h-6 w-6 animate-spin rounded-full border-2 border-white/20 border-t-white" />
+  </div>
+);
 
 const App = () => {
-
   return (
-    <div className="overflow-x-hidden text-stone-300 antialiased">
-      <div className="fixed inset-0 -z-10">
-        <div class="relative h-full w-full bg-black">
-          <div class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
-          <div class="absolute left-0 right-0 top-[-10%] h-[1000px] w-[1000px] rounded-full bg-[radial-gradient(circle_400px_at_50%_300px,#fbfbfb36,#000)]"></div>
-        </div>
-      </div>
+    <div className="relative min-h-screen bg-[#0A0A0A]">
+      {/* Background grid subtle */}
+      <div className="pointer-events-none fixed inset-0 bg-grid" />
 
-      <div className="container mx-auto px-8">
-        <Navbar />
-        <Hero></Hero>
-        <Experience></Experience>
-        <Projects></Projects>
-        <Technologies></Technologies>
-        <Contact></Contact>
-      </div>
+      {/* Radial glow top-right */}
+      <div className="pointer-events-none fixed -right-48 -top-48 h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle_400px_at_50%_50%,rgba(255,255,255,0.03),transparent)]" />
+
+      {/* Navigation */}
+      <Navbar />
+
+      {/* Main content */}
+      <main className="relative z-10">
+        <Hero />
+
+        <Suspense fallback={<SectionFallback />}>
+          <Experience />
+        </Suspense>
+
+        <Suspense fallback={<SectionFallback />}>
+          <Projects />
+        </Suspense>
+
+        <Suspense fallback={<SectionFallback />}>
+          <Technologies />
+        </Suspense>
+
+        <Suspense fallback={<SectionFallback />}>
+          <Contact />
+        </Suspense>
+      </main>
     </div>
   );
 };
