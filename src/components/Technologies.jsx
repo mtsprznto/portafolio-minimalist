@@ -1,10 +1,16 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
 import { BiLogoPostgresql } from "react-icons/bi";
 import { DiPython, DiRedis } from "react-icons/di";
 import { FaNodeJs, FaAws, FaDocker } from "react-icons/fa";
 import { RiReactjsLine, RiVuejsLine } from "react-icons/ri";
 import { SiMongodb, SiTypescript, SiFastapi, SiNextdotjs, SiTailwindcss } from "react-icons/si";
 import { TbBrandNextjs } from "react-icons/tb";
+import {
+  gsap,
+  useGSAP,
+  staggerReveal,
+  NO_PREFER_REDUCED_MOTION,
+} from "../lib/gsap";
 
 const technologies = [
   { icon: DiPython, name: "Python", color: "text-green-400", duration: 3 },
@@ -28,44 +34,70 @@ const tickerItems = [
   "AWS", "Docker", "Tailwind", "GraphQL", "REST API",
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.05 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
-  },
-};
-
-const floatAnimation = (duration) => ({
-  y: [0, -6, 0],
-  transition: {
-    duration,
-    repeat: Infinity,
-    ease: "easeInOut",
-  },
-});
-
 const Technologies = () => {
+  const sectionRef = useRef(null);
+
+  useGSAP(
+    () => {
+      const q = gsap.utils.selector(sectionRef.current);
+
+      gsap.matchMedia().add(NO_PREFER_REDUCED_MOTION, () => {
+        staggerReveal(q(".section-header"), {
+          trigger: sectionRef.current,
+          start: "top 85%",
+          y: 24,
+          stagger: 0,
+          duration: 0.8,
+        });
+
+        // Stack wall entrance — items ripple outward from the center of the
+        // wall (feels more deliberate than a left-to-right sweep for a row).
+        const reveal = gsap.fromTo(
+          q(".tech-item"),
+          { autoAlpha: 0, y: 26 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "back.out(1.6)",
+            stagger: { each: 0.045, from: "center" },
+            scrollTrigger: {
+              trigger: q(".tech-wall")[0],
+              start: "top 85%",
+              once: true,
+            },
+          }
+        );
+
+        // Per-item ambient float — starts only after the entrance finishes so
+        // both tweens never fight over the same `y` property. Offset by index
+        // so tiles drift asynchronously.
+        reveal?.eventCallback("onComplete", () => {
+          q(".tech-item").forEach((item, i) => {
+            const duration = technologies[i]?.duration || 3;
+            gsap.to(item, {
+              y: -5,
+              duration,
+              ease: "sine.inOut",
+              yoyo: true,
+              repeat: -1,
+              delay: i * 0.2,
+            });
+          });
+        });
+      });
+    },
+    { scope: sectionRef }
+  );
+
   return (
-    <section id="tecnologias" className="relative overflow-hidden py-28 lg:py-36">
-      {/* Section Header — left-padded */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        className="mb-16 px-8 lg:mb-20 lg:px-16"
-      >
+    <section
+      ref={sectionRef}
+      id="tecnologias"
+      className="relative overflow-hidden py-28 lg:py-36"
+    >
+      {/* Section Header */}
+      <div className="section-header mb-14 px-8 lg:mb-20 lg:px-16">
         <span className="mb-3 block text-[11px] font-medium tracking-[0.15em] text-white/30 uppercase">
           Stack
         </span>
@@ -73,14 +105,15 @@ const Technologies = () => {
           Tecnologías
         </h2>
         <div className="mt-4 h-px w-16 bg-white/10" />
-      </motion.div>
+      </div>
 
-      {/* Marquee ticker */}
+      {/* Marquee ticker — full-bleed, CSS loop. `w-max` keeps the flex at its
+          intrinsic width so translateX(-50%) = exactly one duplicated set. */}
       <div
-        className="relative mb-16 overflow-hidden border-y border-white/[0.03] py-4"
+        className="relative mb-14 overflow-hidden border-y border-white/[0.03] py-4 lg:mb-20"
         aria-hidden="true"
       >
-        <div className="animate-marquee flex whitespace-nowrap">
+        <div className="animate-marquee flex w-max whitespace-nowrap">
           {[...tickerItems, ...tickerItems].map((item, i) => (
             <span
               key={i}
@@ -93,34 +126,35 @@ const Technologies = () => {
         </div>
       </div>
 
-      {/* Tech Grid */}
+      {/* Stack wall — full content width on desktop (13 cells in one row,
+          hairline separators, border top/bottom), centered 3-col wrap on
+          mobile so the trailing cell never dangles left-aligned. */}
       <div className="px-8 lg:px-16">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="mx-auto grid max-w-4xl grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 lg:gap-4"
-        >
+        <div className="tech-wall mx-auto flex max-w-[1600px] flex-wrap justify-center gap-3 lg:flex-nowrap lg:gap-0 lg:border-y lg:border-white/[0.06]">
           {technologies.map((tech, index) => {
             const Icon = tech.icon;
             return (
-              <motion.div
+              <div
                 key={index}
-                variants={itemVariants}
-                animate={floatAnimation(tech.duration)}
-                className="group flex flex-col items-center gap-2 border-b border-white/[0.03] bg-transparent p-4 transition-all duration-500 hover:bg-white/[0.02]"
+                className={`tech-item group relative w-[calc((100%_-_1.5rem)/3)] overflow-hidden border border-white/[0.04] bg-white/[0.02] lg:w-auto lg:flex-1 lg:border-0 lg:bg-transparent lg:px-2 ${
+                  index === 0 ? "lg:border-l-0" : "lg:border-l lg:border-white/[0.04]"
+                }`}
               >
-                <div className="tech-glow transition-transform duration-500 group-hover:scale-110">
-                  <Icon className={`text-2xl ${tech.color} lg:text-3xl`} />
+                {/* Hover glow — warm radial rising from the bottom edge */}
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_115%,rgba(255,255,255,0.07),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                <div className="relative flex flex-col items-center gap-2.5 py-5 transition-transform duration-500 ease-[var(--ease-luxury)] group-hover:-translate-y-1 lg:py-12">
+                  <Icon
+                    className={`text-3xl ${tech.color} transition-transform duration-500 ease-[var(--ease-luxury)] group-hover:scale-110 lg:text-[2.6rem]`}
+                  />
+                  <span className="text-[10px] font-medium tracking-[0.12em] text-white/30 uppercase transition-colors duration-300 group-hover:text-white/60">
+                    {tech.name}
+                  </span>
                 </div>
-                <span className="text-[10px] font-medium tracking-[0.08em] text-white/30 uppercase transition-colors duration-300 group-hover:text-white/55">
-                  {tech.name}
-                </span>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,5 +1,3 @@
-import demo1_gestpass from "../assets/projects/demo1_gestpass.png";
-import demo4_arriendopv from "../assets/projects/demo4_arriendopv.png";
 import demo3_academ from "../assets/projects/demo3_academ.png";
 import demo5_coffedream from "../assets/projects/demo5_coffe.png";
 import demo6_bankco_beta from "../assets/projects/demo6_bankco_beta.png";

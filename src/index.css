@@ -78,11 +78,6 @@ html {
   background-size: 48px 48px;
 }
 
-/* ─── Tech Icon Glow ─── */
-.tech-glow {
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.06));
-}
-
 /* ─── Marquee ticker ─── */
 @keyframes marquee {
   from { transform: translateX(0); }
@@ -103,4 +98,30 @@ html {
 }
 .col-immersive:hover img {
   transform: scale(1.03);
+}
+
+/* ─── Experience card cursor spotlight ─── */
+.exp-glare {
+  background: radial-gradient(
+    220px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.08),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.exp-glare.is-visible {
+  opacity: 1;
+}
+
+/* ─── Project preview lazy fade ───
+   Preview imgs start transparent over the designed placeholder and only
+   fade in once the real screenshot has loaded. Failed/missing previews
+   simply stay hidden, so the placeholder always reads as intentional. */
+.preview-img {
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-luxury);
+}
+.preview-img.preview-loaded {
+  opacity: 1;
 }

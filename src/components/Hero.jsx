@@ -1,31 +1,90 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
 import { IoMdCloudDownload } from "react-icons/io";
 import profilePic from "../assets/profilePic.jpeg";
 import { HERO_CONTENT } from "../constants";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
-  },
-};
+import {
+  gsap,
+  useGSAP,
+  EASE_LUXURY,
+  EASE_OUT_EXPO,
+  NO_PREFER_REDUCED_MOTION,
+} from "../lib/gsap";
 
 const Hero = () => {
+  const sectionRef = useRef(null);
+
+  useGSAP(
+    () => {
+      gsap.matchMedia().add(NO_PREFER_REDUCED_MOTION, () => {
+        // 1) Editorial entrance — staggered rise of the text column.
+        const tl = gsap.timeline({ defaults: { ease: EASE_OUT_EXPO } });
+        tl.fromTo(
+          ".hero-badge",
+          { autoAlpha: 0, y: 24 },
+          { autoAlpha: 1, y: 0, duration: 0.9 },
+          0.15
+        )
+          .fromTo(
+            ".hero-name",
+            { autoAlpha: 0, y: 48 },
+            { autoAlpha: 1, y: 0, duration: 1.1 },
+            0.3
+          )
+          .fromTo(
+            ".hero-tagline",
+            { autoAlpha: 0, y: 32 },
+            { autoAlpha: 1, y: 0, duration: 0.9 },
+            0.55
+          )
+          .fromTo(
+            ".hero-ctas",
+            { autoAlpha: 0, y: 28 },
+            { autoAlpha: 1, y: 0, duration: 0.9 },
+            0.75
+          )
+          .fromTo(
+            ".hero-scroll-hint",
+            { autoAlpha: 0 },
+            { autoAlpha: 1, duration: 1 },
+            1.6
+          );
+
+        // 2) Ken Burns settle — both portraits breathe in on load.
+        gsap.fromTo(
+          ".hero-mobile-img",
+          { scale: 1.15 },
+          { scale: 1.05, duration: 2.4, ease: EASE_LUXURY, delay: 0.4 }
+        );
+        // Desktop keeps a bit of zoom as headroom for the parallax below.
+        gsap.fromTo(
+          ".hero-desktop-img",
+          { scale: 1.18 },
+          { scale: 1.12, duration: 2.4, ease: EASE_LUXURY, delay: 0.4 }
+        );
+
+        // 3) Desktop portrait parallax — subtle, scrub-linked to scroll.
+        gsap.fromTo(
+          ".hero-desktop-img",
+          { yPercent: -4 },
+          {
+            yPercent: 4,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: true,
+            },
+          }
+        );
+      });
+    },
+    { scope: sectionRef }
+  );
+
   return (
     <section
+      ref={sectionRef}
       id="inicio"
       className="relative flex min-h-[100dvh] flex-col overflow-hidden lg:flex-row"
     >
@@ -34,7 +93,7 @@ const Hero = () => {
         <img
           src={profilePic}
           alt="Matías Pérez Nauto"
-          className="h-full w-full object-cover object-top grayscale"
+          className="hero-mobile-img h-full w-full object-cover object-top grayscale"
           loading="eager"
         />
         <div
@@ -47,43 +106,26 @@ const Hero = () => {
       </div>
 
       {/* ── Text column ── */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 flex flex-1 flex-col justify-end bg-[#0A0A0A] px-8 pb-16 pt-10 lg:w-[55%] lg:flex-none lg:px-16 lg:pb-24 lg:pt-32"
-      >
+      <div className="relative z-10 flex flex-1 flex-col justify-end bg-[#0A0A0A] px-8 pb-16 pt-10 lg:w-[55%] lg:flex-none lg:px-16 lg:pb-24 lg:pt-32">
         {/* Badge */}
-        <motion.span
-          variants={itemVariants}
-          className="mb-6 block text-[10px] font-medium tracking-[0.2em] text-white/30 uppercase"
-        >
+        <span className="hero-badge mb-6 block text-[10px] font-medium tracking-[0.2em] text-white/30 uppercase">
           FULLSTACK &amp; AI ENGINEER
-        </motion.span>
+        </span>
 
         {/* Name */}
-        <motion.h1
-          variants={itemVariants}
-          className="font-primary text-[clamp(2.8rem,7vw,7rem)] font-extrabold leading-[0.85] tracking-[-0.04em] text-white"
-        >
+        <h1 className="hero-name font-primary text-[clamp(2.8rem,7vw,7rem)] font-extrabold leading-[0.85] tracking-[-0.04em] text-white">
           Matías
           <br />
           Pérez Nauto
-        </motion.h1>
+        </h1>
 
         {/* Tagline */}
-        <motion.p
-          variants={itemVariants}
-          className="mt-6 max-w-sm text-[14px] leading-relaxed text-white/40"
-        >
+        <p className="hero-tagline mt-6 max-w-sm text-[14px] leading-relaxed text-white/40">
           {HERO_CONTENT}
-        </motion.p>
+        </p>
 
         {/* CTAs */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-10 flex flex-wrap items-center gap-3"
-        >
+        <div className="hero-ctas mt-10 flex flex-wrap items-center gap-3">
           <a
             href="/CV_Matias_Perez_Nauto.pdf"
             target="_blank"
@@ -101,15 +143,15 @@ const Hero = () => {
           >
             VER PROYECTOS
           </a>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       {/* ── Desktop image column (45%) ── */}
       <div className="relative hidden lg:block lg:w-[45%]">
         <img
           src={profilePic}
           alt="Matías Pérez Nauto"
-          className="absolute inset-0 h-full w-full object-cover grayscale"
+          className="hero-desktop-img absolute inset-0 h-full w-full object-cover grayscale"
           loading="eager"
         />
         <div
@@ -126,17 +168,12 @@ const Hero = () => {
       </div>
 
       {/* Scroll indicator — desktop only */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 1 }}
-        className="pointer-events-none absolute bottom-8 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex"
-      >
+      <div className="hero-scroll-hint pointer-events-none absolute bottom-8 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex">
         <span className="text-[10px] font-medium tracking-[0.2em] text-white/25 uppercase">
           SCROLL
         </span>
         <div className="h-10 w-px bg-gradient-to-b from-white/20 to-transparent" />
-      </motion.div>
+      </div>
     </section>
   );
 };
