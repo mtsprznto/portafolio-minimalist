@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 /* ─── Design System Tokens ─── */
@@ -16,6 +17,7 @@
 
   /* Typography */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   /* Custom easing */
   --ease-luxury: cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -76,6 +78,31 @@ html {
     linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 48px 48px;
+}
+
+/* ─── Tech-archive grid overlay (emerald trace lines) ─── */
+.bg-grid-tech {
+  background-image:
+    linear-gradient(to right, rgba(52, 211, 153, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(52, 211, 153, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 72%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 72%);
+}
+
+/* ─── Tech scanline sweep (very subtle, decorative) ─── */
+@keyframes tech-scan {
+  from { transform: translateY(-120%); }
+  to { transform: translateY(720%); }
+}
+.tech-scan {
+  background: linear-gradient(to bottom, transparent, rgba(52, 211, 153, 0.05), transparent);
+  animation: tech-scan 9s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tech-scan {
+    animation: none;
+  }
 }
 
 /* ─── Marquee ticker ─── */
