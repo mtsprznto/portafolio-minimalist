@@ -60,6 +60,15 @@ const Projects = () => {
     .map((p) => p.repositorio ?? "")
     .join("|");
 
+  // Stable key for the desktop featured set — changes only when the actual
+  // repos in the horizontal scene change, not on every background fetch that
+  // returns the same data.
+  const featuredKey = projects
+    .filter((p) => PREVIEW_REPOS.has(p.repositorio))
+    .slice(0, FEATURED_COUNT)
+    .map((p) => p.repositorio)
+    .join(",");
+
   // Fresh dataset → back to the first page.
   useEffect(() => {
     setPage(1);
@@ -226,7 +235,7 @@ const Projects = () => {
         });
       });
     },
-    { scope: sectionRef, dependencies: [projects, loading] }
+    { scope: sectionRef, dependencies: [featuredKey, loading] }
   );
 
   // Mobile cards: re-created whenever the visible page changes so the reveal
@@ -270,7 +279,7 @@ const Projects = () => {
         });
       });
     },
-    { scope: sectionRef, dependencies: [mobileCardsKey, projects, loading] }
+    { scope: sectionRef, dependencies: [mobileCardsKey, loading] }
   );
 
   if (loading) {
